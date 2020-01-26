@@ -1,0 +1,20 @@
+{
+    "AttibuteSet" : {
+        "Description" : "Models the temporal and spatial distribution of the active layer thickness and temperature of permafrost soils. The underlying approximation accounts for effects of air temperature, snow cover, vegatation, soil moisture, soil thermal properties to predict temperature at the ground surface and mean active layer thickness.",
+        "Wiki" : "https://csdms.colorado.edu/wiki/Model:Kudryavtsev_Model",
+        "Keywords" : [],
+        "Category" : {
+            "Principle" : "CSDMS",
+            "Path" : "Models - Hydrology Focus Research Group"
+        }
+    },
+    "Runtime" : {
+        "Version" : "",
+        "HardwareConfigures" : [],
+        "SoftwareConfigures" : [],
+        "Assemblies" : []
+    },
+    "AdditionFiles" : [
+        "E:\\GitCode\\permamodel\\permamodel"
+    ]
+}

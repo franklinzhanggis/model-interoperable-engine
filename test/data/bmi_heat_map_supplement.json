@@ -1,0 +1,18 @@
+{
+    "AttibuteSet" : {
+        "Description" : "Demo model for CSDMS BMI in python",
+        "Wiki" : "https://csdms.colorado.edu",
+        "Keywords" : [],
+        "Category" : {
+            "Principle" : "CSDMS",
+            "Path" : "Models - Demo"
+        }
+    },
+    "Runtime" : {
+        "Version" : "",
+        "HardwareConfigures" : [],
+        "SoftwareConfigures" : [],
+        "Assemblies" : []
+    },
+    "AdditionFiles" : []
+}
