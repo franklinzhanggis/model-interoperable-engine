@@ -13,7 +13,7 @@ Software architecture description.
 Before install it, please ensure your PC has Python 3.7 and pip already. There are two methods to install package.
 
 ### 1. Download
-Download [pip package](standard-demo/bmi/release/BMI-OpenGMS-Engine-0.1.0.tar.gz)
+Download [pip package](standard-demo/bmi/release/BMI-OpenGMS-Engine-0.1.2.tar.gz)
 
 ### 2. Install pip package
 Open cmd window in Windows or shell in Linux or MacOS, pip.
@@ -76,6 +76,10 @@ the package can be deployed in [the wrapper system of OpenGMS (GeoModelServiceCo
 
 #### Demo 1 - HeatMap
 
+HeatMap is the CSDMS BMI offical demo.
+
+##### Step 1 Run the script below (or run the script in test file)
+
 ``` python
 
 def test_for_bmi_opengms_engine():
@@ -84,10 +88,31 @@ def test_for_bmi_opengms_engine():
 
 ```
 
+Run the script above and generate the package.
+
+##### Step 2 Download the wrapper system (release version) or visit public wrapper system online
+
+[windows]()
+
+Public Online Wrapper System (http://106.14.78.235:8060), and deploy the model service by the package
+
+![avatar](./doc/deploy.png)
 
 
+##### Step 3 Invoke the service by test data
 
-HeatMap is the CSDMS BMI offical demo 
+Click the invoke button
+
+![avatar](./doc/invoke.png)
+
+Upload data for model invoking
+
+Data configuration (test data can be found in `test\data`):
+
+* init.yaml - Init
+* input_plate_surface__temperature.dat - INPUT_plate_surface__temperature
+
+![avatar](./doc/uploadData.png)
 
 ## Contributors
 ### Founders/Designers
