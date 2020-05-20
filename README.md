@@ -92,7 +92,7 @@ Run the script above and generate the package.
 
 ##### Step 2 Download the wrapper system (release version) or visit public wrapper system online
 
-[windows]()
+[windows](http://106.14.78.235/doc/ContainerPacking_2019-10-25.zip)
 
 Public Online Wrapper System (http://106.14.78.235:8060), and deploy the model service by the package
 

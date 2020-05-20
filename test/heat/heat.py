@@ -158,7 +158,7 @@ class Heat(object):
         Heat
             A new instance of a Heat object.
         """
-        config = yaml.load(file_like)
+        config = yaml.load(file_like, Loader=yaml.FullLoader)
         return cls(**config)
 
     def advance_in_time(self):
