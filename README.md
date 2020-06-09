@@ -1,9 +1,9 @@
-# Model Interoperation Engine
+# Model Interoperable Engine
 
 [![Travis (.org)](doc/OpenGMS.svg)](http://geomodeling.njnu.edu.cn/)
 
 ## Introduction
-Engine for model interoperation among model standard. This project aims to build kinds of engines for interoperation among different model standards, including BMI (from CSDMS), OpenMI, OpenGMS and etc. 
+Engine for model interoperation among model standards. This project aims to build kinds of engines for interoperation among BMI (from CSDMS), OpenMI, OpenGMS and etc. 
 
 ## Software Architecture
 Software architecture description. 
