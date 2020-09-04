@@ -14,6 +14,7 @@ import shutil
 import zipfile
 import tempfile
 from mdl_python import ModelClass, Category, LocalAttribute, ModelDatasetItem, ModelEvent, ModelParameter, ModelState, ModelStateTransition, RequriementConfig, SoftwareConfig
+# from ogmsservice import OGMSService_DEBUG as ogms
 
 def zipDir(dirpath, outFullName):
     zip = zipfile.ZipFile(outFullName, "w", zipfile.ZIP_DEFLATED)
@@ -58,7 +59,7 @@ def copyFileOrDir(fullpath, target):
         
 class BMIOpenGMSEngine():
     @staticmethod
-    def convertBMI2OpenGMS(bmiComponent, componentName, supplement = None):
+    def convertBMI2OpenGMS(bmiComponent: str, componentName: str, supplement: str = None):
         #! import model component
         filename = bmiComponent
         model = componentName
@@ -245,7 +246,6 @@ class BMIOpenGMSEngine():
         #! clear temp files
         shutil.rmtree(dirname, ignore_errors=True)
 
-# convertBMI2OpenGMS(sys.argv[1], sys.argv[2])
 
 if len(sys.argv) < 3:
     BMIOpenGMSEngine.convertBMI2OpenGMS(sys.argv[1], sys.argv[2])
