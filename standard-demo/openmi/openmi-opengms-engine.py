@@ -7,12 +7,9 @@ import sys
 import numpy as np
 import json
 import os
-import importlib
 import uuid
 import random
 import shutil
-import zipfile
-import tempfile
 import OGMSService
 import shutil
 from xml.dom.minidom import Document, parse

@@ -190,7 +190,7 @@ class OGMSService(Bmi):
 
 
 svc = OGMSService()
-svc.bindOGMSService("172.21.212.103", 8060, "5eb19b154b1d6302ac0637ce")
+svc.bindOGMSService("172.21.212.119", 8060, "5ab91f625c1ca514046fc5a6")
 inputs = svc.get_input_var_names()
 print(inputs)
 outputs = svc.get_output_var_names()
