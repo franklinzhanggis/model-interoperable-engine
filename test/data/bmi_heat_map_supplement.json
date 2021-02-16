@@ -9,9 +9,24 @@
         }
     },
     "Runtime" : {
-        "Version" : "",
-        "HardwareConfigures" : [],
-        "SoftwareConfigures" : [],
+        "Version" : "1.0",
+        "HardwareConfigures" : [
+            {
+                "key" : "CPU frequency",
+                "value" : "1GHz"
+            },
+            {
+                "key" : "Memory",
+                "value" : "1GB"
+            }
+		],
+        "SoftwareConfigures" : [
+            {
+                "key" : "Python",
+                "platform" : "x86|x64",
+                "value" : "3.6"
+            }
+        ],
         "Assemblies" : []
     },
     "AdditionFiles" : []

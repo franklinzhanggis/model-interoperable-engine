@@ -113,6 +113,7 @@ class BMIOpenGMSEngine():
             print("This model component don't follow BMI standard : finalize")
             exit()
 
+        bmi_model.initialize()
         #! start to organize MDL
         modelName = bmi_model.get_component_name()
 
@@ -192,6 +193,60 @@ class BMIOpenGMSEngine():
         runtime.addHardwareRequirement(RequriementConfig("Main Frequency", "1.0"))
         runtime.addHardwareRequirement(RequriementConfig("Memory Size", "1024MB"))
 
+        remains = {
+            "inputs" : [],
+            "outputs" : [],
+            "grids" : []
+        }
+        
+        ipts = bmi_model.get_input_var_names()
+        opts = bmi_model.get_output_var_names()
+
+        for ipt in ipts:
+            ipt = {
+                "name" : ipt
+            }
+            ipt["nbytes"] = bmi_model.get_var_nbytes(ipt["name"])
+            ipt["type"] = bmi_model.get_var_type(ipt["name"])
+            gridID = bmi_model.get_var_grid(ipt["name"])
+            grid = {}
+            grid["name"] = bmi_model.get_grid_type(gridID)
+            ipt["grid"] = grid["name"]
+            remains["inputs"].append(ipt)
+            flag = True
+            for gd in remains["grids"]:
+                if gd["name"] == grid["name"]:
+                    flag = False
+                    break
+            if flag:
+                grid["shape"] = bmi_model.get_grid_shape(gridID)
+                grid["spacing"] = bmi_model.get_grid_spacing(gridID)
+                grid["origin"] = bmi_model.get_grid_origin(gridID)
+                remains["grids"].append(grid)
+
+        for opt in opts:
+            opt = {
+                "name" : opt
+            }
+            opt["nbytes"] = bmi_model.get_var_nbytes(opt["name"])
+            opt["type"] = bmi_model.get_var_type(opt["name"])
+            grid = bmi_model.get_var_grid(opt["name"])
+            gridID = bmi_model.get_var_grid(opt["name"])
+            grid = {}
+            grid["name"] = bmi_model.get_grid_type(gridID)
+            opt["grid"] = grid["name"]
+            remains["outputs"].append(opt)
+            flag = True
+            for gd in remains["grids"]:
+                if gd["name"] == grid["name"]:
+                    flag = False
+                    break
+            if flag:
+                grid["shape"] = bmi_model.get_grid_shape(gridID)
+                grid["spacing"] = bmi_model.get_grid_spacing(gridID)
+                grid["origin"] = bmi_model.get_grid_origin(gridID)
+                remains["grids"].append(grid)
+
 
         #! generate working directories
         # tmpdirs = random.sample('zyxwvutsrqponmlkjihgfedcba',6)
@@ -209,6 +264,9 @@ class BMIOpenGMSEngine():
         os.mkdir(dirname + "/testify")
         os.mkdir(dirname + "/supportive")
         shutil.copyfile(resourceDir + "/license.txt", dirname + "/license.txt")
+        f_pd = open(dirname + "/model/bmi_preserving_document.json", "w")
+        json.dump(remains, f_pd)
+        f_pd.close()
 
         #! generate setup file
         ft = open(resourceDir + "/template/init.pyt", "r")

@@ -32,7 +32,8 @@ class ModelService(Service):
     def invoke(self, list_data):
         path = "/modelser/" + self.id + "?ac=run&inputdata=["
         for index, item in enumerate(list_data):
-            path += "{\"StateId\":\"" + item.stateid + "\",\"StateName\":\"" + item.statename + "\",\"Event\":\"" + item.eventname + "\",\"DataId\":\"" + item.dataid + "\",\"Destoryed\":\"" + str(item.destoryed) + "\"}"
+            path += "{\"StateId\":\"" + item.stateid + "\",\"StateName\":\"" + item.statename + "\",\"Event\":\"" + item.eventname + "\",\"DataId\":\"" + item.dataid + "\",\"Destoryed\":\"" + str(item.destoryed) + "\"},"
+        path = path[:-1]
         path += "]"
         jsData = HttpHelper.Request_get_sync(self.ip, self.port, path)
         recordid = -1

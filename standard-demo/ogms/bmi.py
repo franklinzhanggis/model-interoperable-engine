@@ -49,6 +49,8 @@ class OGMSService(Bmi):
         jsMDL = json.loads(strMDL)
         inputs = []
         states = jsMDL["ModelClass"]["Behavior"]["StateGroup"]["States"]["State"]
+        if states["$"]:
+            states = [states]
         for state in states:
             for event in state["Event"]:
                 if event["$"]["type"] == "response":
@@ -60,6 +62,8 @@ class OGMSService(Bmi):
         jsMDL = json.loads(strMDL)
         outputs = []
         states = jsMDL["ModelClass"]["Behavior"]["StateGroup"]["States"]["State"]
+        if states["$"]:
+            states = [states]
         for state in states:
             for event in state["Event"]:
                 if event["$"]["type"] == "noresponse":
@@ -105,18 +109,18 @@ class OGMSService(Bmi):
         eventName = params[1]
         data = None
         for ip in self._inputs:
-            if ip.stateName == stateName and ip.eventName == eventName:
+            if ip.statename == stateName and ip.eventname == eventName:
                 data = self._ac.getDataByID(ip.dataid)
         for op in self._outputs:
-            if op.stateName == stateName and op.eventName == eventName:
+            if op.statename == stateName and op.eventname == eventName:
                 data = self._ac.getDataByID(ip.dataid)
         if data == None:
             return None
-        data.save("./tmp.dat")
-        if dest:
-            dest = np.loadtxt("./tmp.dat")
-        value = np.loadtxt("./tmp.dat")
-        return value
+        data.save(dest)
+        # if dest:
+        #     dest = np.loadtxt("./tmp.dat")
+        # value = np.loadtxt("./tmp.dat")
+        return ""
 
     def get_value_ptr(self, name: str) -> np.ndarray:
         pass
@@ -124,15 +128,15 @@ class OGMSService(Bmi):
     def get_value_at_indices(self, name: str, dest: np.ndarray, inds: np.ndarray) -> np.ndarray:
         pass
 
-    def set_value(self, name: str, values: np.ndarray) -> None:
+    def set_value(self, name: str, values) -> None:
         params = name.split("-")
         stateName = params[0]
         eventName = params[1]
-        np.savetxt("./tmp.dat", values)
-        dataid = self._ac.uploadDataByFile(stateName + "-" + eventName, "./tmp.dat")
-        os.remove("./tmp.dat")
+        # np.savetxt("./tmp.dat", values)
+        dataid = self._ac.uploadDataByFile(stateName + "-" + eventName, values)
+        # os.remove("./tmp.dat")
         for ip in self._inputs:
-            if ip.stateName == stateName and ip.eventName == eventName:
+            if ip.statename == stateName and ip.eventname == eventName:
                 ip.dataid = dataid
                 return
         datacfg = self._ac.createDataConfigurationItem(stateName, eventName, dataid)
@@ -190,8 +194,12 @@ class OGMSService(Bmi):
 
 
 svc = OGMSService()
-svc.bindOGMSService("172.21.212.119", 8060, "5ab91f625c1ca514046fc5a6")
+svc.bindOGMSService("127.0.0.1", 8060, "5f5f1a08611b395c4cbcfb53")
 inputs = svc.get_input_var_names()
 print(inputs)
 outputs = svc.get_output_var_names()
 print(outputs)
+svc.set_value("FvcomLuState_step1-fvcom_lu_getdom", "./standard-demo/ogms/cha_dep.geo")
+svc.set_value("FvcomLuState_step1-fvcom_lu_cha_dep", "E:/GitCode/model-interoperation-engine/standard-demo/ogms/getdom.dat")
+svc.update()
+svc.get_value("FvcomLuState_step1-fvcom_lu_obc_xy", "./standard-demo/ogms/lu_obc.dat")

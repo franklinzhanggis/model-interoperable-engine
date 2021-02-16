@@ -2,7 +2,7 @@ from __init__ import OGMSService_DEBUG
 
 
 def main():
-   server = OGMSService_DEBUG.CreateServer("127.0.0.1", "8060");
+   server = OGMSService_DEBUG.CreateServer("127.0.0.1", "8060")
    status = server.connect()
    if status:
        access = server.getServiceAccess()
@@ -19,7 +19,7 @@ def main():
        record.refresh()
        for index, item in enumerate(record.outputs):
            dat = access.getDataByID(item.dataid)
-           data_value = dat.value;
+           data_value = dat.value
            ext = data_value[data_value.find('.') + 1:]
            dat.save("E:\\DemoData\\TouchAir\\" + item.eventname + '.' + ext)
 
